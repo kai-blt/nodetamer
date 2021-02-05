@@ -53,7 +53,7 @@ function App() {
   const [connections, setConnections] = useState("");
   const [nodeArray, setNodeArray] = useState([]);
   const [connectionsArray, setConnectionsArray] = useState([]);
-  
+  const [nodeMap, setNodeMap] = useState(new Map());
 
 
   useEffect(() => {
@@ -65,7 +65,6 @@ function App() {
     const newConnections = connections.split(",");
     if (connections.length > 1) {
       newConnections.map((connection, index) => {
-        
         if (connection.includes(">")) {
           newConnections[index] = connection.split(">")
           newConnections[index].splice(1, 0,">")
@@ -100,7 +99,7 @@ function App() {
   const handleClick = (e) => {
     if (e.detail === 3) {
       const n = document.querySelector(`#${e.target.id}`);
-      if (n.style.backgroundColor == "seagreen") {
+      if (n.style.backgroundColor === "seagreen") {
         return n.style.backgroundColor = "beige"
       } else {
         return n.style.backgroundColor = "seagreen"
@@ -151,42 +150,62 @@ function App() {
         </InputBox>
         <NodeContainer>
         {nodes
-          ? nodeArray.map(n => <Draggable><Node id={n} onClick={handleClick}>{n}</Node></Draggable>)
+          ? nodeArray.map(n => <Draggable key={Math.random()}><Node key={Math.random()} id={n} onClick={handleClick}>{n}</Node></Draggable>)
           : null 
         }
         {connectionsArray.length > 1
           ? connectionsArray.map((connection) => {
               const result = connection.map((c, index) => {
+
+                const startNode = connection[index - 1] 
+                const endNode = connection[index + 1]
+
                 switch(c) {
                   case ">":
-                    const start = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
-                    const end = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
-                    return <Xarrow start={start} end={end} color="#02bfe7"/>                
+                    const start = (typeof startNode) !== "undefined" ? startNode : 0
+                    const end = (typeof endNode) !== "undefined" ? endNode : 0               
+                    return <Xarrow key={Math.random()} start={start} end={end} color="#02bfe7"/>  
+
                   case ">": 
-                    const start2 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
-                    const end2 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
-                    return <Xarrow start={start2} end={end2} color="#02bfe7"/>
+                    const start2 = (typeof startNode) !== "undefined" ? startNode : 0
+                    const end2 = (typeof endNode) !== "undefined" ? endNode : 0
+                    return <Xarrow key={Math.random()} start={start2} end={end2} color="#02bfe7"/>
+
                   case "<":
-                    const start3 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
-                    const end3 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
-                    return <Xarrow start={start3} end={end3} color="#02bfe7"/>
+                    const start3 = (typeof endNode) !== "undefined" ? endNode : 0
+                    const end3 = (typeof startNode) !== "undefined" ? startNode : 0
+                    return <Xarrow key={Math.random()} start={start3} end={end3} color="#02bfe7"/>
+
                   case "&":
-                    const start4 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
-                    const end4 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
-                     
-                    const start5 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
-                    const end5 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
-                    return <div><Xarrow start={start4} end={end4} color="#02bfe7"/><Xarrow start={start5} end={end5} color="#02bfe7"/></div>
+                    const start4 = (typeof startNode) !== "undefined" ? startNode : 0
+                    const end4 = (typeof endNode) !== "undefined" ? endNode : 0                     
+                    const start5 = (typeof endNode) !== "undefined" ? endNode : 0
+                    const end5 = (typeof startNode) !== "undefined" ? startNode : 0
+                    return <div><Xarrow key={Math.random()} start={start4} end={end4} color="#02bfe7"/><Xarrow start={start5} end={end5} color="#02bfe7"/></div>
+
                   case " ":
                     break;
+
                   default:
-                    return
+                    break;
                 }
               })
               return result
             })
           : null
         }
+        {/* {connectionsArray.length > 1
+          ? connectionsArray.map((connection) => {
+              if (nodeMap.has(connection[0])) {
+                const node = nodeMap.get(connection[0])
+                nodeMap.set(connection[0], node.push([connection[2]]))
+              } else {
+                nodeMap.set(connection[0], [connection[2]])
+                console.log(nodeMap)
+              }
+          })
+          : null
+        } */}
         </NodeContainer>
       </Container>   
     </div>
