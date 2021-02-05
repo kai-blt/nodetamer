@@ -158,7 +158,7 @@ function App() {
         </InputBox>
         <NodeContainer>
         {nodes
-          ? nodeArray.map(n => <Draggable key={Math.random()}><Node key={Math.random()} id={n} onClick={handleClick}>{n}</Node></Draggable>)
+          ? nodeArray.map(n => <Draggable key={n}><Node key={Math.random()} id={n} onClick={handleClick}>{n}</Node></Draggable>)
           : null 
         }
         {connectionsArray.length > 1
