@@ -136,7 +136,7 @@ function App() {
 
   //Change Node color on triple click
   const handleClick = (e) => {
-    if (e.detail === 3) {
+    if (e.shiftKey) {
       const n = document.querySelector(`#${e.target.id}`);
       if (n.style.backgroundColor === "seagreen") {
         return n.style.backgroundColor = "beige"
@@ -184,7 +184,7 @@ function App() {
           <div>
             <h2>Other Controls</h2>
             <p><Symbol>Double-click</Symbol> and drag to move nodes</p>
-            <p><Symbol>Triple-click</Symbol> to mark node with color</p>
+            <p><Symbol>Shift-click</Symbol> to mark node with color</p>
           </div>
         </InputBox>
         <NodeContainer>
