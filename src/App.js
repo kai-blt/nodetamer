@@ -113,7 +113,8 @@ function App() {
     <>
     <div>
       <header>
-        <h1>Trees and Graphs</h1>
+        <h1>Node Tamer</h1>
+        <h2>A tool for visualizing linked lists, trees and graphs</h2>
       </header> 
       <Container>
         <InputBox>

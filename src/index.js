@@ -75,12 +75,11 @@ const GlobalStyle = createGlobalStyle`
 
   h1,h2,h3,h4,h5,h5 {
     font-weight: 700;
-    margin-bottom: 2%;
+    margin: 2%;
   }
 
   h1 {
-    font-size: 6rem;
-    margin: 2%;
+    font-size: 6rem;    
   }
 
   p {
