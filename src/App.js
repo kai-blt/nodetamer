@@ -47,12 +47,36 @@ const Node = styled.div`
   text-shadow: none;
   color: #000;
   box-shadow: 6px 6px 12px #111;
+  @media (max-width: 1400px) {
+    font-size: 3rem;
+    width: 100px;
+    height: 100px;
+  }
+  @media (max-width: 700px) {
+    font-size: 2.5rem;
+    width: 80px;
+    height: 80px;
+  }
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const Symbol = styled.span`
    color: #02bfe7;
    font-weight: 700;
    font-size: 2rem;
+   @media (max-width: 1400px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 700px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 
@@ -71,6 +95,7 @@ function App() {
    
     //Split connection entries on symbols &,<,> for drawing arrows
     const newConnections = connections.split(",");
+    
     if (connections.length > 1) {
       newConnections.map((connection, index) => {
         if (connection.includes(">")) {
@@ -132,7 +157,7 @@ function App() {
       <Container>
         <InputBox>
           <div>
-            <label>Add Nodes: &nbsp;</label>
+            <label>Add Nodes: &nbsp;</label><br/>
             <input
               type="text"
               name="nodes"
@@ -142,7 +167,7 @@ function App() {
             <p>Add nodes as comma separated node values in this input box</p>
           </div>
           <div>
-            <label>Add Connections: &nbsp;</label>
+            <label>Add Connections: &nbsp;</label><br/>
             <input
               type="text"
               name="nodes"

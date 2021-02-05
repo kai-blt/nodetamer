@@ -84,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2, h3{
     font-size: 1.8rem;
-    margin: 0.25% 2.5%;
+    margin: 0.25% 0;
   }
 
 
@@ -102,6 +102,56 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 4px;
     margin-bottom: 2%;
     padding: 1%;
+  }
+
+  
+
+  @media (max-width: 1400px) {
+    body{
+      font-size: 1.4rem;
+    }
+    h1{
+      font-size: 4rem;
+    }
+    h2{
+      font-size: 1.2rem;
+    }
+    label {
+      font-size: 2rem;
+    }
+  }
+  @media (max-width: 700px) {
+    body{
+      font-size: 1.2rem;
+      line-height: 1rem;
+    }
+    h1{
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+    h2{
+      font-size: 1.2rem;
+    }
+    label {
+      font-size: 1.5rem;
+    }
+  }
+  @media (max-width: 500px) {
+    body{
+      font-size: 1rem;
+      line-height: 1rem;
+    }
+    h1{
+      font-size: 4rem;
+      line-height: 3.5rem;
+    }
+    h2{
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    label {
+      font-size: 1rem;
+    }
   }
 `;
 
