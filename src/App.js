@@ -103,6 +103,12 @@ function App() {
     setConnections(e.target.value.trim());
   }
 
+  //Drag handler
+  const handleDrag = (e) => {
+    setConnectionsArray([...connectionsArray])
+  }
+
+
   //Change Node color on triple click
   const handleClick = (e) => {
     if (e.detail === 3) {
@@ -158,7 +164,7 @@ function App() {
         </InputBox>
         <NodeContainer>
         {nodes
-          ? nodeArray.map(n => <Draggable key={n}><Node key={Math.random()} id={n} onClick={handleClick}>{n}</Node></Draggable>)
+          ? nodeArray.map(n => <Draggable key={n} onDrag={handleDrag}><Node key={Math.random()} id={n} onClick={handleClick}>{n}</Node></Draggable>)
           : null 
         }
         {connectionsArray.length > 1
