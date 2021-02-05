@@ -13,7 +13,7 @@ const InputBox = styled.div`
   display: flex;
   justify-content: space-around;
   div {
-    width: 50%;
+    width: 30%;
   }
 `;
 
@@ -35,7 +35,7 @@ const Node = styled.div`
   background-color: beige;
   width: 150px;
   height: 150px;
-  font-size: 4rem;
+  font-size: 3.5rem;
   text-shadow: none;
   color: #000;
   box-shadow: 6px 6px 12px #111;
@@ -78,7 +78,6 @@ function App() {
         } else {
           newConnections[index] = [newConnections[index]]
         }
-       
       });      
     }
     
@@ -137,7 +136,7 @@ function App() {
               onChange={handleConnections}
             />
             <p>
-              Use the following characters for connections:<br/>
+              Add connections as comma separated pairs. E.g. a&gt;b, b&lt;c, d&amp;e:<br/>
               <Symbol>&gt;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>→</Symbol>&nbsp;&nbsp;,
               &nbsp;&nbsp;<Symbol>&lt;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>←</Symbol>&nbsp;&nbsp;,
               &nbsp;&nbsp;<Symbol>&amp;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>↔</Symbol>
