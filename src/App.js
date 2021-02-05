@@ -3,6 +3,14 @@ import Xarrow from'react-xarrows';
 import Draggable from 'react-draggable';
 import styled from 'styled-components';
 
+const Header = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  background: #02bfe7;
+  padding: 1%;
+`;
+
 const Container = styled.section`
   width: 100%;
   height: 100vh;
@@ -111,10 +119,10 @@ function App() {
   return (
     <>
     <div>
-      <header>
+      <Header>
         <h1>Node Tamer</h1>
-        <h2>A tool for visualizing linked lists, trees and graphs</h2>
-      </header> 
+        <h2>A tool for visualizing linked lists, trees and graphs. Created by Brendan Lai-Tong</h2>
+      </Header> 
       <Container>
         <InputBox>
           <div>

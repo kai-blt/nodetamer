@@ -70,17 +70,23 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     background-color: #444;
     margin: auto;
-    text-shadow: 2px 2px 4px #000;
+    text-shadow: 1px 1px 2px #000;
   }
 
   h1,h2,h3,h4,h5,h5 {
     font-weight: 700;
-    margin: 2%;
   }
 
   h1 {
-    font-size: 6rem;    
+    font-size: 8rem;    
+    margin: 2% 2%;
   }
+
+  h2, h3{
+    font-size: 1.8rem;
+    margin: 0.25% 2.5%;
+  }
+
 
   p {
     margin-bottom: 2%;
