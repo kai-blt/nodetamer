@@ -44,41 +44,67 @@ const Node = styled.div`
 const Symbol = styled.span`
    color: #02bfe7;
    font-weight: 700;
+   font-size: 2rem;
 `;
 
 
 function App() {
   const [nodes, setNodes] = useState("");
   const [connections, setConnections] = useState("");
-
   const [nodeArray, setNodeArray] = useState([]);
   const [connectionsArray, setConnectionsArray] = useState([]);
+  
 
 
   useEffect(() => {
-    const newNodeArray = Array.from(nodes.split(","))
-    setNodeArray(newNodeArray)
-    const newConnections = Array.from(connections.split("&").join("&").split(">").join(">").split("<").join("<"))
+    //Split node entries by comma for node rendering
+    const newNodeArray = Array.from(nodes.split(","));
+    setNodeArray(newNodeArray);
+   
+    //Split connection entries on symbols &,<,> for drawing arrows
+    const newConnections = connections.split(",");
+    if (connections.length > 1) {
+      newConnections.map((connection, index) => {
+        
+        if (connection.includes(">")) {
+          newConnections[index] = connection.split(">")
+          newConnections[index].splice(1, 0,">")
+        } else if (connection.includes("<")) {
+          newConnections[index] = connection.split("<")
+          newConnections[index].splice(1, 0,"<")
+        } else if (connection.includes("&")) {
+          newConnections[index] = connection.split("&")
+          newConnections[index].splice(1, 0,"&")
+        } else {
+          newConnections[index] = [newConnections[index]]
+        }
+       
+      });      
+    }
+    
     setConnectionsArray(newConnections)
+   
    }, [nodes, connections])
 
   
+  //Node Input Handler
   const handleNodes = (e) => {
-    setNodes(e.target.value);
+    setNodes(e.target.value.trim());
   }
 
+  //Connection Input Handler
   const handleConnections = (e) => {
-    setConnections(e.target.value);
+    setConnections(e.target.value.trim());
   }
 
+  //Change Node color on triple click
   const handleClick = (e) => {
-    //Check if triple click
     if (e.detail === 3) {
-      const nodessss = document.querySelector(`#${e.target.id}`)
-      if (nodessss.style.backgroundColor == "seagreen") {
-        return nodessss.style.backgroundColor = "beige"
+      const n = document.querySelector(`#${e.target.id}`);
+      if (n.style.backgroundColor == "seagreen") {
+        return n.style.backgroundColor = "beige"
       } else {
-        return nodessss.style.backgroundColor = "seagreen"
+        return n.style.backgroundColor = "seagreen"
       }
     }    
   }
@@ -100,7 +126,7 @@ function App() {
               value={nodes}
               onChange={handleNodes}
             />
-            <p>Add nodes by typing comma separated node values in this input box</p>
+            <p>Add nodes as comma separated node values in this input box</p>
           </div>
           <div>
             <label>Add Connections: &nbsp;</label>
@@ -111,10 +137,16 @@ function App() {
               onChange={handleConnections}
             />
             <p>
-              Use the following characters for connections: &nbsp;&nbsp;
-              <Symbol>&gt;</Symbol>&nbsp;&nbsp;for ---&gt; , <Symbol>&lt;</Symbol>&nbsp;&nbsp;for &lt;--- ,
-              or <Symbol>&amp;</Symbol>&nbsp;&nbsp;for &lt;---&gt;
+              Use the following characters for connections:<br/>
+              <Symbol>&gt;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>→</Symbol>&nbsp;&nbsp;,
+              &nbsp;&nbsp;<Symbol>&lt;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>←</Symbol>&nbsp;&nbsp;,
+              &nbsp;&nbsp;<Symbol>&amp;</Symbol>&nbsp;&nbsp;for&nbsp;&nbsp;<Symbol>↔</Symbol>
             </p>
+          </div>
+          <div>
+            <h2>Other Controls</h2>
+            <p><Symbol>Double-click</Symbol> and drag to move nodes</p>
+            <p><Symbol>Triple-click</Symbol> to mark node with color</p>
           </div>
         </InputBox>
         <NodeContainer>
@@ -122,29 +154,36 @@ function App() {
           ? nodeArray.map(n => <Draggable><Node id={n} onClick={handleClick}>{n}</Node></Draggable>)
           : null 
         }
-        {connectionsArray
-          ? connectionsArray.map((n, index) => {
-              switch(n) {
+        {connectionsArray.length > 1
+          ? connectionsArray.map((connection) => {
+              const result = connection.map((c, index) => {
+                switch(c) {
+                  case ">":
+                    const start = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
+                    const end = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
+                    return <Xarrow start={start} end={end} color="#02bfe7"/>                
                   case ">": 
-                    const start = (typeof connectionsArray[index - 1]) !== "undefined" ? connectionsArray[index - 1] : 0
-                    const end = (typeof connectionsArray[index + 1]) !== "undefined" ? connectionsArray[index + 1] : 0
-                    return <Xarrow start={start} end={end} color="#02bfe7"/>
-                  case "<":
-                    const start2 = (typeof connectionsArray[index + 1]) !== "undefined" ? connectionsArray[index + 1] : 0
-                    const end2 = (typeof connectionsArray[index - 1]) !== "undefined" ? connectionsArray[index - 1] : 0
+                    const start2 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
+                    const end2 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
                     return <Xarrow start={start2} end={end2} color="#02bfe7"/>
+                  case "<":
+                    const start3 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
+                    const end3 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
+                    return <Xarrow start={start3} end={end3} color="#02bfe7"/>
                   case "&":
-                    const start3 = (typeof connectionsArray[index - 1]) !== "undefined" ? connectionsArray[index - 1] : 0
-                    const end3 = (typeof connectionsArray[index + 1]) !== "undefined" ? connectionsArray[index + 1] : 0
+                    const start4 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
+                    const end4 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
                      
-                    const start4 = (typeof connectionsArray[index + 1]) !== "undefined" ? connectionsArray[index + 1] : 0
-                    const end4 = (typeof connectionsArray[index - 1]) !== "undefined" ? connectionsArray[index - 1] : 0
-                    return <div><Xarrow start={start3} end={end3} color="#02bfe7"/><Xarrow start={start4} end={end4} color="#02bfe7"/></div>
+                    const start5 = (typeof connection[index + 1]) !== "undefined" ? connection[index + 1] : 0
+                    const end5 = (typeof connection[index - 1]) !== "undefined" ? connection[index - 1] : 0
+                    return <div><Xarrow start={start4} end={end4} color="#02bfe7"/><Xarrow start={start5} end={end5} color="#02bfe7"/></div>
                   case " ":
                     break;
                   default:
                     return
                 }
+              })
+              return result
             })
           : null
         }

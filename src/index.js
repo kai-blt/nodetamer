@@ -66,6 +66,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 1.6rem;
+    line-height: 3rem;
     color: #fff;
     background-color: #444;
     margin: auto;
@@ -74,11 +75,16 @@ const GlobalStyle = createGlobalStyle`
 
   h1,h2,h3,h4,h5,h5 {
     font-weight: 700;
+    margin-bottom: 2%;
   }
 
   h1 {
     font-size: 6rem;
     margin: 2%;
+  }
+
+  p {
+    margin-bottom: 2%;
   }
 
   label {
