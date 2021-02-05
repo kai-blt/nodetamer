@@ -154,7 +154,7 @@ function App() {
           : null 
         }
         {connectionsArray.length > 1
-          ? connectionsArray.map((connection) => {
+          ? connectionsArray.map(connection => {
               const result = connection.map((c, index) => {
 
                 const startNode = connection[index - 1] 
@@ -166,22 +166,15 @@ function App() {
                     const end = (typeof endNode) !== "undefined" ? endNode : 0               
                     return <Xarrow key={Math.random()} start={start} end={end} color="#02bfe7"/>  
 
-                  case ">": 
+                  case "<": 
                     const start2 = (typeof startNode) !== "undefined" ? startNode : 0
                     const end2 = (typeof endNode) !== "undefined" ? endNode : 0
-                    return <Xarrow key={Math.random()} start={start2} end={end2} color="#02bfe7"/>
-
-                  case "<":
-                    const start3 = (typeof endNode) !== "undefined" ? endNode : 0
-                    const end3 = (typeof startNode) !== "undefined" ? startNode : 0
-                    return <Xarrow key={Math.random()} start={start3} end={end3} color="#02bfe7"/>
+                    return <Xarrow key={Math.random()} start={end2} end={start2} color="#02bfe7"/>
 
                   case "&":
                     const start4 = (typeof startNode) !== "undefined" ? startNode : 0
-                    const end4 = (typeof endNode) !== "undefined" ? endNode : 0                     
-                    const start5 = (typeof endNode) !== "undefined" ? endNode : 0
-                    const end5 = (typeof startNode) !== "undefined" ? startNode : 0
-                    return <div><Xarrow key={Math.random()} start={start4} end={end4} color="#02bfe7"/><Xarrow start={start5} end={end5} color="#02bfe7"/></div>
+                    const end4 = (typeof endNode) !== "undefined" ? endNode : 0      
+                    return <div><Xarrow key={Math.random()} start={start4} end={end4} color="#02bfe7"/><Xarrow start={end4} end={start4} color="#02bfe7"/></div>
 
                   case " ":
                     break;
@@ -194,18 +187,19 @@ function App() {
             })
           : null
         }
-        {/* {connectionsArray.length > 1
-          ? connectionsArray.map((connection) => {
-              if (nodeMap.has(connection[0])) {
-                const node = nodeMap.get(connection[0])
-                nodeMap.set(connection[0], node.push([connection[2]]))
-              } else {
-                nodeMap.set(connection[0], [connection[2]])
-                console.log(nodeMap)
-              }
+        {/* {console.log(nodeArray, connectionsArray)}
+        {nodeArray
+          ? nodeArray.map(node => {
+            connectionsArray.map(connection => {
+              const path = connection.map((c, index) => {
+                
+              
+              })
+            })
           })
           : null
         } */}
+        
         </NodeContainer>
       </Container>   
     </div>
