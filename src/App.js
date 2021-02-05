@@ -156,7 +156,8 @@ function App() {
         {connectionsArray.length > 1
           ? connectionsArray.map(connection => {
               const result = connection.map((c, index) => {
-
+                
+                //Reference to the start and end node names
                 const startNode = connection[index - 1] 
                 const endNode = connection[index + 1]
 
@@ -172,9 +173,9 @@ function App() {
                     return <Xarrow key={Math.random()} start={end2} end={start2} color="#02bfe7"/>
 
                   case "&":
-                    const start4 = (typeof startNode) !== "undefined" ? startNode : 0
-                    const end4 = (typeof endNode) !== "undefined" ? endNode : 0      
-                    return <div><Xarrow key={Math.random()} start={start4} end={end4} color="#02bfe7"/><Xarrow start={end4} end={start4} color="#02bfe7"/></div>
+                    const start3 = (typeof startNode) !== "undefined" ? startNode : 0
+                    const end3 = (typeof endNode) !== "undefined" ? endNode : 0      
+                    return <div><Xarrow key={Math.random()} start={start3} end={end3} color="#02bfe7"/><Xarrow start={end3} end={start3} color="#02bfe7"/></div>
 
                   case " ":
                     break;
