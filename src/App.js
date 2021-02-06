@@ -136,8 +136,9 @@ function App() {
 
   //Change Node color on triple click
   const handleClick = (e) => {
+    console.log(e)
     if (e.shiftKey) {
-      const n = document.querySelector(`#${e.target.id}`);
+      const n = document.getElementById(`${e.target.id}`);
       if (n.style.backgroundColor === "seagreen") {
         return n.style.backgroundColor = "beige"
       } else {
