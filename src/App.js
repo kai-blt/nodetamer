@@ -184,7 +184,7 @@ function App() {
           </div>
           <div>
             <h2>Other Controls</h2>
-            <p><Symbol>Double-click</Symbol> and drag to move nodes</p>
+            <p><Symbol>Drag</Symbol> node to move</p>
             <p><Symbol>Shift-click</Symbol> to mark node with color</p>
           </div>
         </InputBox>
