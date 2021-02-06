@@ -152,7 +152,7 @@ function App() {
     <div>
       <Header>
         <h1>Node Tamer</h1>
-        <h2>A tool for visualizing linked lists, trees and graphs. Created by Brendan Lai-Tong</h2>
+        <h2>A tool for visualizing linked lists, trees and graphs. Created by <a href="https://portfolio-flax-theta.vercel.app/" target="_blank">Brendan Lai-Tong</a></h2>
       </Header> 
       <Container>
         <InputBox>

@@ -87,6 +87,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0.25% 0;
   }
 
+  a {
+    color: #fff;
+    &:hover {
+      color: #777;
+    }
+    text-decoration: none;
+  }
 
   p {
     margin-bottom: 2%;
